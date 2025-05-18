@@ -1,10 +1,11 @@
 package com.bluemoon.management.bluemoon.entity;
 
+import com.bluemoon.management.bluemoon.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-
+import com.bluemoon.management.bluemoon.enums.UserRole;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -32,31 +33,16 @@ public class User {
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_role")
-    private String userRole;
-
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
-
     @Column(name = "avatar_url")
     private String avatarUrl;
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
 
-/*
- TODO [Reverse Engineering] create field to map the 'user_role' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
     @Column(name = "user_role", columnDefinition = "user_role not null")
-    private Object userRole;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'account_status' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
     @ColumnDefault("'Active'")
     @Column(name = "account_status", columnDefinition = "account_status not null")
-    private Object accountStatus;
-*/
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus;
+
 }

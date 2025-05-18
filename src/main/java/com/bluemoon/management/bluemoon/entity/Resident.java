@@ -1,5 +1,7 @@
 package com.bluemoon.management.bluemoon.entity;
 
+import com.bluemoon.management.bluemoon.enums.Gender;
+import com.bluemoon.management.bluemoon.enums.ResidencyStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,27 +50,14 @@ public class Resident {
 
     @Column(name = "id_card_issue_date")
     private LocalDate idCardIssueDate;
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
 
-    @Column(name = "resident_email", length = 100)
-    private String residentEmail;
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
-
-/*
- TODO [Reverse Engineering] create field to map the 'resident_gender' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
     @Column(name = "resident_gender", columnDefinition = "gender not null")
-    private Object residentGender;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'residency_status' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Enumerated(EnumType.STRING)
+    private Gender residentGender;
+
     @ColumnDefault("'Undefined'")
     @Column(name = "residency_status", columnDefinition = "residency_status not null")
-    private Object residencyStatus;
-*/
+    @Enumerated(EnumType.STRING)
+    private ResidencyStatus residencyStatus;
+
 }

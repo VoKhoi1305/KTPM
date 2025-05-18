@@ -1,5 +1,6 @@
 package com.bluemoon.management.bluemoon.entity;
 
+import com.bluemoon.management.bluemoon.enums.RAType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,17 +41,8 @@ public class ResidenceAndAbsence {
     @Column(name = "ra_register_time")
     private OffsetDateTime raRegisterTime;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
-
-/*
- TODO [Reverse Engineering] create field to map the 'ra_type' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
     @Column(name = "ra_type", columnDefinition = "residence_absence_type not null")
-    private Object raType;
-*/
+    @Enumerated(EnumType.STRING)
+    private RAType raType;
+
 }

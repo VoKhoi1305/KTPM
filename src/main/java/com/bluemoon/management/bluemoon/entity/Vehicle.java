@@ -1,14 +1,14 @@
 package com.bluemoon.management.bluemoon.entity;
 
+import com.bluemoon.management.bluemoon.enums.VehicleStatus;
+import com.bluemoon.management.bluemoon.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -44,33 +44,21 @@ public class Vehicle {
     @Column(name = "model", length = 100)
     private String model;
 
-    @Column(name = "vin_number", length = 50)
-    private String vinNumber;
 
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
 
     @Column(name = "deregistration_date")
     private LocalDate deregistrationDate;
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
 
-/*
- TODO [Reverse Engineering] create field to map the 'vehicle_type' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
     @Column(name = "vehicle_type", columnDefinition = "vehicle_type not null")
-    private Object vehicleType;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'vehicles_status' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Enumerated(EnumType.STRING)
+    private VehicleType vehicleType;
+
+
     @ColumnDefault("'PendingApproval'")
     @Column(name = "vehicles_status", columnDefinition = "vehicle_status not null")
-    private Object vehiclesStatus;
-*/
+    @Enumerated(EnumType.STRING)
+    private VehicleStatus vehiclesStatus;
 }
