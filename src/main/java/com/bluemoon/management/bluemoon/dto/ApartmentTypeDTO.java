@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApartmentTypeDTO {
-    private int ApartmentTypeid;
+    private Integer ApartmentTypeid;
     private String ApartmentTypeName;
 }

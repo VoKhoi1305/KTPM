@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentReceiptsDTO {
-    private int receiptId;
-    private int apartmentId;
+    private Integer receiptId;
+    private Integer apartmentId;
     private double totalAmountReceived;
     private Timestamp receiptTimestamp;
     private String notes;

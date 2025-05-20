@@ -19,12 +19,12 @@ import java.time.OffsetDateTime;
 public class Apartment {
     @Id
     @Column(name = "apartment_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "apartment_type_id", nullable = false)
-    @Enumerated(EnumType.STRING)
     private ApartmentType apartmentType;
 
     @Column(name = "handover_date")
@@ -40,7 +40,7 @@ public class Apartment {
     private Double usableAreaSqm;
 
 
-    @ColumnDefault("'Vacant'")
+    @ColumnDefault("Vacant")
     @Column(name = "usage_status", columnDefinition = "apartment_usage_status not null")
     @Enumerated(EnumType.STRING)
     private ApartmentUsageStatus usageStatus;

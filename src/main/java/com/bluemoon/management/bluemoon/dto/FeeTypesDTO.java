@@ -19,7 +19,7 @@ public class FeeTypesDTO {
     private FeeCategory category;
     private LocalDate feeIssueDate;
     private FeeFrequency feeFrequency;
-    private CalculationMethod caculationMethod;
+    private CalculationMethod calculationMethod;
     private LocalDate dueDate;
     private FeeStatus feeStatus;
     private double unitPrice;
