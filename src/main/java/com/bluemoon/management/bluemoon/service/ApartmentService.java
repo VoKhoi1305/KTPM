@@ -19,6 +19,7 @@ public interface ApartmentService {
      * Tạo một apartment mới
      * @param apartmentCreateDTO thông tin apartment cần tạo
      * @return thông tin apartment đã tạo
+     * @author KhoiVA
      */
     ApartmentDTO createApartment(ApartmentCreateDTO apartmentCreateDTO);
 
@@ -27,6 +28,17 @@ public interface ApartmentService {
      * @param apartmentId ID của apartment
      * @param usageStatus trạng thái sử dụng mới
      * @return thông tin apartment sau khi cập nhật
+     * @author KhoiVA
      */
     ApartmentDTO updateApartmentUsageStatus(Integer apartmentId, ApartmentUsageStatus usageStatus);
+
+
+    /**
+     * thay đổi id của chủ hộ
+     * @param apartmentId
+     * @param headResidentId
+     * @return thông tin apartment sau khi cập nhat
+     * @author KhoiVA
+     */
+    ApartmentDTO updateHeadResidentId(Integer apartmentId, Integer headResidentId);
 }

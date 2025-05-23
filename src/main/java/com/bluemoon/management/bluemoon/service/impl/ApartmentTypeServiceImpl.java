@@ -27,4 +27,6 @@ public class ApartmentTypeServiceImpl implements ApartmentTypeService {
         return apartmentTypeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy loại căn hộ với ID: " + id));
     }
+
+
 }

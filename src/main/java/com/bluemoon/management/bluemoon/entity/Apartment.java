@@ -2,20 +2,20 @@ package com.bluemoon.management.bluemoon.entity;
 
 import com.bluemoon.management.bluemoon.enums.ApartmentUsageStatus;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "apartments")
+@DynamicUpdate
 public class Apartment {
     @Id
     @Column(name = "apartment_id", nullable = false)
