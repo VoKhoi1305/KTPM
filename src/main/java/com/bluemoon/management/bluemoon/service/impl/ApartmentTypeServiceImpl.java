@@ -9,8 +9,10 @@ import com.bluemoon.management.bluemoon.service.ApartmentTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+
 public class ApartmentTypeServiceImpl implements ApartmentTypeService {
 
     private final ApartmentTypeRepository apartmentTypeRepository;
@@ -19,8 +21,6 @@ public class ApartmentTypeServiceImpl implements ApartmentTypeService {
     public ApartmentTypeServiceImpl(ApartmentTypeRepository apartmentTypeRepository) {
         this.apartmentTypeRepository = apartmentTypeRepository;
     }
-
-    // Các phương thức khác...
 
     @Override
     public ApartmentType findById(Integer id) {

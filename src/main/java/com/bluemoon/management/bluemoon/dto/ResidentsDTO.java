@@ -2,9 +2,14 @@ package com.bluemoon.management.bluemoon.dto;
 
 import com.bluemoon.management.bluemoon.enums.Gender;
 import com.bluemoon.management.bluemoon.enums.ResidencyStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResidentsDTO {
     private int residentId;
     private String residentName;

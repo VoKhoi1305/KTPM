@@ -28,8 +28,6 @@ public class ApartmentController {
 
     @GetMapping("/get")
     public ResponseEntity<List<ApartmentDTO>> getAll() {
-     //  ApartmentCreateDTO apartmentCreateDTO = new ApartmentCreateDTO();
-      //  ApartmentDTO createdApartment = apartmentService.createApartment(apartmentCreateDTO);
         List<ApartmentDTO> apartments = apartmentService.getAllApartments();
         return ResponseEntity.status(HttpStatus.OK).body(apartments);
     }

@@ -2,10 +2,15 @@ package com.bluemoon.management.bluemoon.dto;
 
 import com.bluemoon.management.bluemoon.enums.VehicleStatus;
 import com.bluemoon.management.bluemoon.enums.VehicleType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class VehicleDTO {
     private int vehicleId;
     private int apartmentId;

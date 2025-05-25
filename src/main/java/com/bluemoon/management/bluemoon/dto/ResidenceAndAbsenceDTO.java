@@ -1,10 +1,15 @@
 package com.bluemoon.management.bluemoon.dto;
 
 import com.bluemoon.management.bluemoon.enums.RAType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResidenceAndAbsenceDTO {
     private int raID;
     private int residentID;
