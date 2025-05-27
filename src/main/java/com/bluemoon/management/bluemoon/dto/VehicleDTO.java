@@ -12,9 +12,9 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleDTO {
-    private int vehicleId;
-    private int apartmentId;
-    private int ownerId;
+    private Integer vehicleId;
+    private Integer apartmentId;
+    private Integer ownerId;
     private VehicleType vehicleType;
     private String licensePlate;
     private String model;

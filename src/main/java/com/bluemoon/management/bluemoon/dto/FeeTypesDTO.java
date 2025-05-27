@@ -25,6 +25,4 @@ public class FeeTypesDTO {
     private double unitPrice;
     private boolean isMandatory;
     private boolean applyToAllActive;
-
-
 }

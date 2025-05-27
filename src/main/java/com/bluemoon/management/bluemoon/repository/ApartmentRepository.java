@@ -12,11 +12,12 @@ import java.time.LocalDate;
 
 @Repository
 public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
-    @Query(value = "INSERT INTO apartments (apartment_type_id, usable_area_sqm, usage_status, handover_date) " +
-            "VALUES (:typeId, :area, CAST(:status AS apartment_usage_status), :handoverDate) " +
+    @Query(value = "INSERT INTO apartments (apartment_type_id, apartment_number, usable_area_sqm, usage_status, handover_date) " +
+            "VALUES (:typeId, :apartmentNumber , :area, CAST(:status AS apartment_usage_status), :handoverDate) " +
             "RETURNING apartment_id", nativeQuery = true)
     Integer insertApartmentWithCast(
             @Param("typeId") Integer apartmentTypeId,
+            @Param("apartmentNumber") Integer apartmentNumber,
             @Param("area") Double usableAreaSqm,
             @Param("status") String usageStatus,
             @Param("handoverDate") LocalDate handoverDate);

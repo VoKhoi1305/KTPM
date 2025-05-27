@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ResidentService {
     List<ResidentsDTO> getAllResidents();
-
+    ResidentsDTO createResident(ResidentsDTO residentsDTO);
 }

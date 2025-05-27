@@ -44,4 +44,7 @@ public class Apartment {
     @Column(name = "usage_status", columnDefinition = "apartment_usage_status not null")
     @Enumerated(EnumType.STRING)
     private ApartmentUsageStatus usageStatus;
+
+    @Column(name =" apartment_number" )
+    private Integer apartmentNumber;
 }

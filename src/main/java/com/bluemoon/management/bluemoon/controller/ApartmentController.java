@@ -51,10 +51,8 @@ public class ApartmentController {
     @PutMapping("/updateusagestatus/{apartmentId}")
     public ResponseEntity<ApartmentDTO> updateUsageStatus(
             @RequestBody Map<String, Object> requestBody) {
-
         Integer updateApartmentId = (Integer) requestBody.get("updateApartmentId");
         String updateUsageStatus = requestBody.get("updateUsageStatus").toString();
-
         ApartmentDTO updateApartment = apartmentService.updateApartmentUsageStatus(updateApartmentId, ApartmentUsageStatus.valueOf(updateUsageStatus));
         return new ResponseEntity<>(updateApartment, HttpStatus.OK);
     }

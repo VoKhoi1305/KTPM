@@ -24,24 +24,12 @@ public class FeeType {
     @Column(name = "fee_name", nullable = false)
     private String feeName;
 
-    @Column(name = "fee_issue_date", nullable = false)
-    private LocalDate feeIssueDate;
-
-    @Column(name = "due_date")
-    private LocalDate dueDate;
-
-    @ColumnDefault("true")
-    @Column(name = "apply_to_all_active")
-    private Boolean applyToAllActive;
-
-    @Column(name = "unit_price", precision = 15, scale = 2)
-    private BigDecimal unitPrice;
+    @Column(name = "unit_price",columnDefinition = "numeric")
+    private double unitPrice;
 
     @ColumnDefault("true")
     @Column(name = "is_mandatory", nullable = false)
     private Boolean isMandatory = false;
-
-
 
     @Column(name = "category", columnDefinition = "fee_category not null")
     @Enumerated(EnumType.STRING)

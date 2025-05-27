@@ -47,6 +47,7 @@ public class ApartmentServiceImpl implements ApartmentService {
         dto.setApartmentTypeId(apartment.getApartmentType().getId());
         dto.setUsableAreaSqm(apartment.getUsableAreaSqm());
         dto.setUsageStatus(apartment.getUsageStatus());
+        dto.setApartmentNumber(apartment.getApartmentNumber());
         dto.setHandoverDate(apartment.getHandoverDate());
         dto.setCurrentHeadResidentId(apartment.getCurrentHeadResident() != null ? apartment.getCurrentHeadResident().getId() : null);
         return dto;
@@ -73,6 +74,7 @@ public class ApartmentServiceImpl implements ApartmentService {
         // Use the custom repository method with casting
         Integer newId = apartmentRepository.insertApartmentWithCast(
                 apartmentCreateDTO.getApartmentTypeId(),
+                apartmentCreateDTO.getApartmentNumber(),
                 apartmentCreateDTO.getUsableAreaSqm(),
                 String.valueOf(apartmentCreateDTO.getUsageStatus()),
                 apartmentCreateDTO.getHandoverDate());

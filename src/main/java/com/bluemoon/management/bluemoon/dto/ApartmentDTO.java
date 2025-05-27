@@ -17,4 +17,5 @@ public class ApartmentDTO { // For general responses
     private Integer currentHeadResidentId;
     private ApartmentUsageStatus usageStatus;
     private LocalDate handoverDate;
+    private Integer apartmentNumber;
 }

@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResidenceAndAbsenceDTO {
-    private int raID;
-    private int residentID;
+    private Integer raID;
+    private Integer residentID;
     private RAType raType;
     private LocalDate raFrom;
     private LocalDate raTo;

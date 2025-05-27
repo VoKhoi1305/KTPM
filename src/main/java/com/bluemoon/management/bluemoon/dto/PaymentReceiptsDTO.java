@@ -15,6 +15,6 @@ public class PaymentReceiptsDTO {
     private double totalAmountReceived;
     private Timestamp receiptTimestamp;
     private String notes;
-    private int receivableId;
+    private Integer receivableId;
     
 }

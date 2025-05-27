@@ -1,9 +1,13 @@
 package com.bluemoon.management.bluemoon.service.impl;
 
 import com.bluemoon.management.bluemoon.dto.ResidentsDTO;
+import com.bluemoon.management.bluemoon.entity.Apartment;
 import com.bluemoon.management.bluemoon.entity.Resident;
+import com.bluemoon.management.bluemoon.enums.Gender;
+import com.bluemoon.management.bluemoon.repository.ApartmentRepository;
 import com.bluemoon.management.bluemoon.repository.ResidentsRepository;
 import com.bluemoon.management.bluemoon.service.ResidentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +20,12 @@ import java.util.stream.Collectors;
 public class ResidentServiceImpl implements ResidentService {
 
     private final ResidentsRepository residentsRepository;
+    private final ApartmentRepository apartmentRepository;
 
     @Autowired
-    public ResidentServiceImpl(ResidentsRepository residentsRepository) {
+    public ResidentServiceImpl(ResidentsRepository residentsRepository, ApartmentRepository apartmentRepository) {
         this.residentsRepository = residentsRepository;
+        this.apartmentRepository = apartmentRepository;
     }
 
     private ResidentsDTO convertEntityToDto(Resident resident) {
@@ -49,7 +55,37 @@ public class ResidentServiceImpl implements ResidentService {
         return residents.stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
-
     }
 
+    @Override
+    @Transactional
+    public ResidentsDTO createResident(ResidentsDTO residentDTO) {
+        try{
+            Gender.valueOf(String.valueOf(residentDTO.getGender()));
+        }
+        catch(IllegalArgumentException e){
+            throw new IllegalArgumentException("Invalid gender: " + residentDTO.getGender());
+        }
+
+        Apartment apartment = apartmentRepository.findById(residentDTO.getPermanentResidenceApartmentId())
+                .orElseThrow(() -> new EntityNotFoundException("Apartment not found with ID: " + residentDTO.getPermanentResidenceApartmentId()));
+
+        Integer newId = residentsRepository.insertResident(
+                residentDTO.getResidentName(),
+                residentDTO.getResidentPhoneNumber(),
+                residentDTO.getResidentDoB(),
+                String.valueOf(residentDTO.getGender()),
+                residentDTO.getPermanentResidenceApartmentId(),
+                residentDTO.getRelationshipToHead(),
+                residentDTO.getNationality(),
+                String.valueOf(residentDTO.getResidencyStatus()),
+                residentDTO.getPlaceOfBirth(),
+                residentDTO.getIDcardNumber(),
+                residentDTO.getIDCardIssueDate()
+        );
+
+        Resident saveResident = residentsRepository.findById(newId)
+                .orElseThrow(() -> new RuntimeException("Failed to retrieve saved apartment"));
+        return convertEntityToDto(saveResident);
+    }
 }

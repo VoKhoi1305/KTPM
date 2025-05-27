@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 public class Receivable {
     @Id
     @Column(name = "receivable_id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -33,11 +33,6 @@ public class Receivable {
 
     @Column(name = "quantity")
     private int quantity;
-
-    @ColumnDefault("0.00")
-    @Column(name = "base_amount", nullable = false, precision = 15, scale = 2)
-    private BigDecimal baseAmount;
-
 
     @Column(name = "receivables_issue_date")
     private LocalDate receivablesIssueDate;
