@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BluemoonApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(BluemoonApplication.class, args);
+		System.out.println("Hello World!");
 	}
 }

@@ -17,12 +17,10 @@ public class FeeTypesDTO {
     private int typeId;
     private String feeName;
     private FeeCategory category;
-    private LocalDate feeIssueDate;
     private FeeFrequency feeFrequency;
     private CalculationMethod calculationMethod;
-    private LocalDate dueDate;
     private FeeStatus feeStatus;
     private double unitPrice;
-    private boolean isMandatory;
-    private boolean applyToAllActive;
+    private Boolean isMandatory;  // Đổi thành Boolean
+    private Boolean isApplyToAll; // Đổi thành Boolean
 }

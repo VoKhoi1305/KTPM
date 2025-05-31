@@ -17,7 +17,7 @@ import java.util.Map;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/api/apartments")
+@RequestMapping("/api/apartment")
 public class ApartmentController {
     private final ApartmentService apartmentService;
 
@@ -31,6 +31,8 @@ public class ApartmentController {
         List<ApartmentDTO> apartments = apartmentService.getAllApartments();
         return ResponseEntity.status(HttpStatus.OK).body(apartments);
     }
+
+
     /**
      * API tạo apartment mới
      */
@@ -40,7 +42,8 @@ public class ApartmentController {
         return new ResponseEntity<>(createdApartment, HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateheadresident/{apartmentId}")
+
+    @PutMapping("/updateheadresident/{updateApartmentId}")
     public ResponseEntity<ApartmentDTO> updateHeadResidentId(@RequestBody Map<String, Integer> apartmentIdMap) {
         Integer updateApartmentId = apartmentIdMap.get("updateApartmentId");
         Integer updateHeadResidentId = apartmentIdMap.get("updateHeadResidentId");
@@ -48,7 +51,7 @@ public class ApartmentController {
         return new ResponseEntity<>(updateApartment, HttpStatus.OK);
     }
 
-    @PutMapping("/updateusagestatus/{apartmentId}")
+    @PutMapping("/updateusagestatus/{updateApartmentId}")
     public ResponseEntity<ApartmentDTO> updateUsageStatus(
             @RequestBody Map<String, Object> requestBody) {
         Integer updateApartmentId = (Integer) requestBody.get("updateApartmentId");

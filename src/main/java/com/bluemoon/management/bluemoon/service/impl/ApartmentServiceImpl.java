@@ -60,7 +60,6 @@ public class ApartmentServiceImpl implements ApartmentService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     @Transactional
     public ApartmentDTO createApartment(ApartmentCreateDTO apartmentCreateDTO) {

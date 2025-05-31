@@ -10,5 +10,5 @@ public interface ReceivableService {
     List<ShowReceivableDTO> getAllReceivables();
     ReceivableDTO createReceivable(ReceivableDTO receivable);
     ReceivableDTO updateReceivable(Integer id, String status);
-
+    int createForAllReceivable(List<Integer> ids, Integer feeTypeId);
 }

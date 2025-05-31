@@ -32,7 +32,7 @@ public class ReceivableController {
          return new ResponseEntity<>(receivableDTO1, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{receivableId}")
     ResponseEntity<ReceivableDTO> updateReceivable(@RequestBody Map<String, Object> requestBody) {
             Integer id = (Integer) requestBody.get("receivableId");
             String status = requestBody.get("receivableStatus").toString();

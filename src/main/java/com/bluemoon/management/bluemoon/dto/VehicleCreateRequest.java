@@ -7,24 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleDTO {
-    private Integer vehicleId;
-    private Integer apartmentId;
+public class VehicleCreateRequest {
     private Integer apartmentNumber;
-    private Integer ownerId;
-    private String ownerIdCardNumber;
+    private String cardIdNumber;
     private VehicleType vehicleType;
     private String licensePlate;
-    private String model;
-    private String brand;
-    private String parkingCardID;
+    private String parkingCardId;
     private String assignedParkingSpot;
+    private String brand;
+    private String model;
     private LocalDate registrationDate;
     private LocalDate deregistrationDate;
-    private VehicleStatus vehicleStatus;
-
+    private VehicleStatus vehiclesStatus;
 }

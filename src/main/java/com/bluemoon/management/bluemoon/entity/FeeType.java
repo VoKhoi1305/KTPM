@@ -49,4 +49,8 @@ public class FeeType {
     @Enumerated(EnumType.STRING)
     private FeeStatus feeStatus;
 
+    @ColumnDefault("FALSE")
+    @Column(name ="is_apply_to_all")
+    private Boolean isApplyToAll;
+
 }

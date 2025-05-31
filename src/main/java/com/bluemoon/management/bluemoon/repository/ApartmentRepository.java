@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
@@ -41,4 +43,6 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
             @Param("apartmentId") Integer apartmentId,
             @Param("status") String usageStatus
     );
+
+    Optional<Apartment> findByApartmentNumber(Integer apartmentNumber);
 }

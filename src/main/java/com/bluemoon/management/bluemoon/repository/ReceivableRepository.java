@@ -25,6 +25,17 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Integer>
             @Param("deadline") LocalDate paymentDeadline
     );
 
+    @Query(value = "INSERT INTO receivables (apartment_id, fee_type_id, receivables_status, quantity, receivables_issue_date, payment_deadline) " +
+            "VALUES (:apartmentId, :feeTypeId, CAST(:status AS receivable_status), 1 , :issueDate, :deadline) " +
+            "RETURNING receivable_id", nativeQuery = true)
+    Integer insertReceivableForAllApartments(
+            @Param("apartmentId") Integer apartmentId,
+            @Param("feeTypeId") Integer feeTypeId,
+            @Param("status") String receivablesStatus,
+            @Param("issueDate") LocalDate receivablesIssueDate,
+            @Param("deadline") LocalDate paymentDeadline
+    );
+
     @Query(value = """
         SELECT 
             r.receivable_id as receivableId,
@@ -45,5 +56,13 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Integer>
     @Transactional
     @Query(value = "UPDATE receivables SET receivables_status = CAST(:newStatus as receivable_status) WHERE receivable_id = :receivableId", nativeQuery = true)
     void updateReceivableStatus(@Param("receivableId") Integer receivableId, @Param("newStatus") String newStatus);
+
+
+    @Query(value = "SELECT DISTINCT apartment_id " +
+            "FROM apartments " +
+            "WHERE usage_status = 'Occupied' " ,
+            nativeQuery = true)
+    List<Integer> findActiveApartmentIds();
+
 
 }

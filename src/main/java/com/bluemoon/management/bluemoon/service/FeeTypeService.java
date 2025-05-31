@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface FeeTypeService {
     List<FeeTypesDTO> getAllFeeTypes();
+    FeeTypesDTO insertFeeType(FeeTypesDTO feeTypesDTO);
 }

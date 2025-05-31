@@ -1,8 +1,6 @@
 package com.bluemoon.management.bluemoon.service.impl;
 
-import com.bluemoon.management.bluemoon.dto.ApartmentTypeDTO;
 import com.bluemoon.management.bluemoon.dto.UserDTO;
-import com.bluemoon.management.bluemoon.entity.ApartmentType;
 import com.bluemoon.management.bluemoon.entity.User;
 import com.bluemoon.management.bluemoon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

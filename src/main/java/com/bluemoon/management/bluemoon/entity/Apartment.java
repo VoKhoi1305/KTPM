@@ -47,4 +47,5 @@ public class Apartment {
 
     @Column(name =" apartment_number" )
     private Integer apartmentNumber;
+
 }

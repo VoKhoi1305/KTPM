@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,8 +30,6 @@ public class ReceivableServiceImpl implements ReceivableService {
         this.receivableRepository = receivableRepository;
     }
 
-    
-    
     @Override
     @Transactional
     public List<ShowReceivableDTO> getAllReceivables() {
@@ -87,18 +86,36 @@ public class ReceivableServiceImpl implements ReceivableService {
     }
 
     @Override
+    public int createForAllReceivable(List<Integer> ids, Integer feeTypeId) {
+        AtomicInteger createdCount = new AtomicInteger(0);
+        ids.forEach(apartmentId -> {
+            createReceivableForApartment( apartmentId, feeTypeId);
+            createdCount.incrementAndGet();
+        });
+
+        return createdCount.get();
+    }
+
+
+    @Transactional
+    public void createReceivableForApartment(Integer apartmentId, Integer feeTypeId) {
+        LocalDate issueDate = LocalDate.now();
+        LocalDate paymentDeadline = issueDate.plusWeeks(1);
+        receivableRepository.insertReceivableForAllApartments(
+          apartmentId,
+          feeTypeId,
+          "Issued",
+          issueDate,
+          paymentDeadline
+        );
+    }
+
+    @Override
     @Transactional
     public ReceivableDTO updateReceivable(Integer id, String status) {
         Receivable receivable = receivableRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Apartment not found with ID: " + id));
-
-        // Cập nhật trạng thái sử dụng
-        //apartment.setUsageStatus(usageStatus);
-        // Lưu apartment đã cập nhật
         receivableRepository.updateReceivableStatus(id,status);
-
-
-        // Chuyển đổi apartment đã cập nhật thành DTO và trả về
         return convertToDTO(receivable);
     }
 }

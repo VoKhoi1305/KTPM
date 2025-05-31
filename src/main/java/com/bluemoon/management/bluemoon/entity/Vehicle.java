@@ -61,4 +61,6 @@ public class Vehicle {
     @Column(name = "vehicles_status", columnDefinition = "vehicle_status not null")
     @Enumerated(EnumType.STRING)
     private VehicleStatus vehiclesStatus;
+
+
 }
