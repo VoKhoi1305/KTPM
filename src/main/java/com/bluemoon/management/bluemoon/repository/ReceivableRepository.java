@@ -36,6 +36,8 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Integer>
             @Param("deadline") LocalDate paymentDeadline
     );
 
+
+
     @Query(value = """
         SELECT 
             r.receivable_id as receivableId,

@@ -88,4 +88,12 @@ public class ResidentServiceImpl implements ResidentService {
                 .orElseThrow(() -> new RuntimeException("Failed to retrieve saved apartment"));
         return convertEntityToDto(saveResident);
     }
+
+    @Override
+    public ResidentsDTO getResidentById(Integer residentId){
+        Resident resident = residentsRepository.findById(residentId)
+                .orElseThrow(() -> new EntityNotFoundException("Resident not found"));
+
+        return convertEntityToDto(resident);
+    }
 }

@@ -41,4 +41,6 @@ public interface ApartmentService {
      * @author KhoiVA
      */
     ApartmentDTO updateHeadResidentId(Integer apartmentId, Integer headResidentId);
+
+    ApartmentDTO getApartmentById(Integer apartmentId);
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class ApartmentDTO { // For general responses
     private Integer apartmentId;
     private Integer apartmentTypeId; // Send ID, or nested ApartmentTypeDTO
+    private String apartmentTypeName;
     private double usableAreaSqm;
     private Integer currentHeadResidentId;
     private ApartmentUsageStatus usageStatus;

@@ -54,7 +54,6 @@ public class FeeTypeServiceImpl implements FeeTypeService {
     @Transactional
     public FeeTypesDTO insertFeeType(FeeTypesDTO feeTypesDTO) {
         System.out.println(feeTypesDTO.getIsApplyToAll());
-
         Integer feeTypeId = feeTypeRepository.insertFee(
                 feeTypesDTO.getFeeName(),
                 String.valueOf(feeTypesDTO.getCategory()),
@@ -67,7 +66,6 @@ public class FeeTypeServiceImpl implements FeeTypeService {
         );
         FeeType feeType = feeTypeRepository.findById(feeTypeId)
                 .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy loại phí"));
-        System.out.println("2");
         Boolean isApplyToAll = feeTypesDTO.getIsApplyToAll();
         if(Boolean.TRUE.equals(isApplyToAll))
         {

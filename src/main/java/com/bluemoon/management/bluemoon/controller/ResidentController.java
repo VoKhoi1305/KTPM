@@ -30,6 +30,12 @@ public class ResidentController {
         return new ResponseEntity<>(residents, HttpStatus.OK);
     }
 
+    @GetMapping("/get/{residentId}")
+    public ResponseEntity<ResidentsDTO> getResidentById(@PathVariable Integer residentId) {
+        ResidentsDTO resident = residentService.getResidentById(residentId);
+        return new ResponseEntity<>(resident, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<ResidentsDTO> createResident(@RequestBody ResidentsDTO residentsDTO) {
         ResidentsDTO createdResident = residentService.createResident(residentsDTO);

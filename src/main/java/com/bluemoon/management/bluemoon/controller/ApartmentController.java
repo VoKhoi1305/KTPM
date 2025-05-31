@@ -4,14 +4,15 @@ import com.bluemoon.management.bluemoon.dto.ApartmentCreateDTO;
 import com.bluemoon.management.bluemoon.dto.ApartmentDTO;
 import com.bluemoon.management.bluemoon.entity.Apartment;
 import com.bluemoon.management.bluemoon.enums.ApartmentUsageStatus;
+import com.bluemoon.management.bluemoon.repository.ApartmentRepository;
 import com.bluemoon.management.bluemoon.service.ApartmentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,18 +21,26 @@ import java.util.Map;
 @RequestMapping("/api/apartment")
 public class ApartmentController {
     private final ApartmentService apartmentService;
-
     @Autowired
-    public ApartmentController(ApartmentService apartmentService) {
+    public ApartmentController(ApartmentService apartmentService){
         this.apartmentService = apartmentService;
+
     }
 
     @GetMapping("/get")
+    @Transactional(readOnly = true)
     public ResponseEntity<List<ApartmentDTO>> getAll() {
         List<ApartmentDTO> apartments = apartmentService.getAllApartments();
         return ResponseEntity.status(HttpStatus.OK).body(apartments);
     }
 
+
+    @GetMapping("/get/{apartmentId}")
+    @Transactional(readOnly = true)
+    public ResponseEntity<ApartmentDTO> getApartmentById(@PathVariable Integer apartmentId) {
+        ApartmentDTO apartment = apartmentService.getApartmentById(apartmentId);
+        return ResponseEntity.status(HttpStatus.OK).body(apartment);
+    }
 
     /**
      * API tạo apartment mới
@@ -43,7 +52,8 @@ public class ApartmentController {
     }
 
 
-    @PutMapping("/updateheadresident/{updateApartmentId}")
+
+    @PutMapping("/updateheadresident")
     public ResponseEntity<ApartmentDTO> updateHeadResidentId(@RequestBody Map<String, Integer> apartmentIdMap) {
         Integer updateApartmentId = apartmentIdMap.get("updateApartmentId");
         Integer updateHeadResidentId = apartmentIdMap.get("updateHeadResidentId");
@@ -51,7 +61,7 @@ public class ApartmentController {
         return new ResponseEntity<>(updateApartment, HttpStatus.OK);
     }
 
-    @PutMapping("/updateusagestatus/{updateApartmentId}")
+    @PutMapping("/updateusagestatus")
     public ResponseEntity<ApartmentDTO> updateUsageStatus(
             @RequestBody Map<String, Object> requestBody) {
         Integer updateApartmentId = (Integer) requestBody.get("updateApartmentId");

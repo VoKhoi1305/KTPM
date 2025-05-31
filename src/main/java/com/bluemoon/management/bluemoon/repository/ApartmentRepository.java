@@ -44,5 +44,8 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
             @Param("status") String usageStatus
     );
 
+//    @Query("SELECT a FROM Apartment a JOIN FETCH a.apartmentType WHERE a.apartment_id = :id")
+//    Optional<Apartment> findByIdWithType(@Param("id") Integer id);
+
     Optional<Apartment> findByApartmentNumber(Integer apartmentNumber);
 }

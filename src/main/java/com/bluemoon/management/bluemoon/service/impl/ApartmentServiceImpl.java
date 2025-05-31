@@ -45,6 +45,7 @@ public class ApartmentServiceImpl implements ApartmentService {
         ApartmentDTO dto = new ApartmentDTO();
         dto.setApartmentId(apartment.getId());
         dto.setApartmentTypeId(apartment.getApartmentType().getId());
+        dto.setApartmentTypeName(apartment.getApartmentType().getTypeName());
         dto.setUsableAreaSqm(apartment.getUsableAreaSqm());
         dto.setUsageStatus(apartment.getUsageStatus());
         dto.setApartmentNumber(apartment.getApartmentNumber());
@@ -115,6 +116,16 @@ public class ApartmentServiceImpl implements ApartmentService {
         apartmentRepository.updateHeadResident(apartmentId,headResidentId);
 
         return convertEntityToDto(apartment);
+    }
+
+    @Override
+    public ApartmentDTO getApartmentById(Integer apartmentId) {
+        Apartment apartment = apartmentRepository.findById(apartmentId)
+                .orElseThrow(() -> new EntityNotFoundException("Apartment not found with ID: " + apartmentId));
+
+        return convertEntityToDto(apartment);
+
+
     }
 }
 
