@@ -10,4 +10,6 @@ import java.util.List;
 public interface VehicleService {
     List<VehicleDTO> getVehicles();
     VehicleResponse createVehicleByQuery(VehicleCreateRequest request);
+
+    VehicleDTO getVehicleById(Integer vehicleId);
 }

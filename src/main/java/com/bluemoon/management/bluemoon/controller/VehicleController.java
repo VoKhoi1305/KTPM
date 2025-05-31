@@ -26,9 +26,14 @@ public class VehicleController {
         return ResponseEntity.status(HttpStatus.OK).body(vehicleDTOS);
     }
 
+    @GetMapping("/get/{vehicleId}")
+    public ResponseEntity<VehicleDTO> getVehicleById(@PathVariable Integer vehicleId) {
+        VehicleDTO vehicle = vehicleService.getVehicleById(vehicleId);
+        return ResponseEntity.status(HttpStatus.OK).body(vehicle);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<VehicleResponse> createVehicleByQuery(@RequestBody VehicleCreateRequest request) {
-                 System.out.println("hello world2");
             VehicleResponse response = vehicleService.createVehicleByQuery(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

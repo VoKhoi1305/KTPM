@@ -42,7 +42,8 @@ public class VehicleServiceImpl implements VehicleService {
         dto.setOwnerIdCardNumber(vehicle.getOwnerResident().getIdCardNumber());
         dto.setVehicleType(vehicle.getVehicleType());
         dto.setLicensePlate(vehicle.getLicensePlate());
-        dto.setParkingCardID(vehicle.getAssignedParkingSpot());
+        dto.setParkingCardID(vehicle.getParkingCardId());
+        dto.setAssignedParkingSpot(vehicle.getAssignedParkingSpot());
         dto.setBrand(vehicle.getBrand());
         dto.setModel(vehicle.getModel());
         dto.setRegistrationDate(vehicle.getRegistrationDate());
@@ -59,14 +60,20 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    public VehicleDTO getVehicleById(Integer vehicleId){
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
+        return convertEntityToDto(vehicle);
+    };
+
+
+    @Override
+    @Transactional
     public VehicleResponse createVehicleByQuery(VehicleCreateRequest request) {
-        System.out.println("hello world1");
         // Validate apartment và resident tồn tại
         validateAndGetApartmentResident(request.getApartmentNumber(), request.getCardIdNumber());
-        System.out.println("hello world3");
         // Thực hiện insert và lấy ID trả về
          vehicleRepository.insertVehicleByApartmentAndResident(
-                request.getApartmentNumber(),
+                    request.getApartmentNumber(),
                 request.getCardIdNumber(),
                  String.valueOf(request.getVehicleType()),
                 request.getLicensePlate(),
@@ -78,7 +85,6 @@ public class VehicleServiceImpl implements VehicleService {
                 request.getDeregistrationDate(),
                 String.valueOf(request.getVehiclesStatus())
         );
-
         Integer vehicleId = vehicleRepository.findVehicleIdByDetails(request.getApartmentNumber(),request.getCardIdNumber(),request.getLicensePlate());
 
         if (vehicleId != null) {
@@ -90,6 +96,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     private VehicleResponse mapToResponse(Vehicle vehicle) {
+
         return new VehicleResponse(
                 vehicle.getId(),
                 vehicle.getApartment().getId(),
@@ -113,11 +120,11 @@ public class VehicleServiceImpl implements VehicleService {
      * @return Array chứa [Apartment, Resident]
      */
     private Object[] validateAndGetApartmentResident(Integer apartmentNumber, String cardIdNumber) {
-        Apartment apartment = apartmentRepository.findByApartmentNumber(apartmentNumber)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy apartment với số: " + apartmentNumber));
-
         Resident resident = residentRepository.findByIdCardNumber(cardIdNumber)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy resident với card ID: " + cardIdNumber));
+
+        Apartment apartment = apartmentRepository.findByApartmentNumber(apartmentNumber)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy apartment với số: " + apartmentNumber));
 
         return new Object[]{apartment, resident};
     }
