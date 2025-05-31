@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -46,8 +47,8 @@ public class ReceivableServiceImpl implements ReceivableService {
         dto.setApartmentName((Integer) row[1]);
         dto.setFeeName((String) row[2]);
         dto.setQuantity((Integer) row[3]);
-        dto.setStatus(ReceivableStatus.valueOf(((String) row[4]).toUpperCase()));
-        dto.setPrice((Double) row[5]);
+        dto.setStatus(ReceivableStatus.valueOf(((String) row[4])));
+        dto.setPrice((BigDecimal) row[5]);
         dto.setReceivableIssueDate(((Date) row[6]).toLocalDate());
         return dto;
     }
@@ -117,5 +118,14 @@ public class ReceivableServiceImpl implements ReceivableService {
                 .orElseThrow(() -> new EntityNotFoundException("Apartment not found with ID: " + id));
         receivableRepository.updateReceivableStatus(id,status);
         return convertToDTO(receivable);
+    }
+
+    @Override
+    public  List<ShowReceivableDTO> getAllReceivablesWithFeeType(Integer feeTypeId){
+        List<Object[]> results = receivableRepository.findAllReceivablesWithFeeTypeId(feeTypeId);
+
+        return results.stream()
+                .map(this::convertObjectArrayToDTO)
+                .collect(Collectors.toList());
     }
 }

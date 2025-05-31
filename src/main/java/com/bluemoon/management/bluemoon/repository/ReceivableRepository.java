@@ -54,6 +54,26 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Integer>
         """, nativeQuery = true)
     List<Object[]> findAllReceivablesWithDetails();
 
+
+    @Query(value = """
+        SELECT 
+            r.receivable_id as receivableId,
+            a.apartment_number as apartmentName,
+            ft.fee_name as feeName,
+            r.quantity as quantity,
+            r.receivables_status as status,
+            (ft.unit_price * r.quantity) as price,
+            r.receivables_issue_date as receivableIssueDate
+        FROM receivables r
+        INNER JOIN apartments a ON r.apartment_id = a.apartment_id
+        INNER JOIN fee_types ft ON r.fee_type_id = ft.fee_type_id
+        WHERE ft.fee_type_id = :feeTypeId
+        ORDER BY r.receivables_issue_date DESC
+        """, nativeQuery = true)
+    List<Object[]> findAllReceivablesWithFeeTypeId(
+            @Param("feeTypeId") Integer feeTypeId
+    );
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE receivables SET receivables_status = CAST(:newStatus as receivable_status) WHERE receivable_id = :receivableId", nativeQuery = true)
@@ -65,6 +85,7 @@ public interface ReceivableRepository extends JpaRepository<Receivable, Integer>
             "WHERE usage_status = 'Occupied' " ,
             nativeQuery = true)
     List<Integer> findActiveApartmentIds();
+    List<Receivable> findByFeeTypeId(Integer feeTypeId);
 
 
 }

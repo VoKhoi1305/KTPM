@@ -20,11 +20,18 @@ public class ReceivableController {
         this.receivableService = receivableService;
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<List<ShowReceivableDTO>> getAllReceivables() {
         List<ShowReceivableDTO> receivables = receivableService.getAllReceivables();
         return ResponseEntity.ok(receivables);
     }
+
+    @GetMapping("/get/receivables/{feeTypeId}")
+    public ResponseEntity<List<ShowReceivableDTO>> getReceivableWithFeeType(@PathVariable Integer feeTypeId) {
+        List<ShowReceivableDTO> receivables = receivableService.getAllReceivablesWithFeeType(feeTypeId);
+        return new ResponseEntity<>(receivables, HttpStatus.OK);
+    }
+
 
     @PostMapping("/add")
     public ResponseEntity<ReceivableDTO> addReceivable(@RequestBody ReceivableDTO receivableDTO) {

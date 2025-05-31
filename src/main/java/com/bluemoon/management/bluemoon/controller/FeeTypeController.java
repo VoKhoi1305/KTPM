@@ -1,6 +1,7 @@
 package com.bluemoon.management.bluemoon.controller;
 
 import com.bluemoon.management.bluemoon.dto.FeeTypesDTO;
+import com.bluemoon.management.bluemoon.dto.ReceivableDTO;
 import com.bluemoon.management.bluemoon.entity.FeeType;
 import com.bluemoon.management.bluemoon.service.FeeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
